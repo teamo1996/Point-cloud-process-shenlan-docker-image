@@ -80,6 +80,9 @@ RUN python3 -m pip install --no-cache-dir --upgrade open3d && \
 # ------ pytorch 1.4.0 ------
     conda install pytorch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2 cudatoolkit=10.1 -c pytorch && \
 # ------ tensorflow 2.3.0 ------
-    pip install tensorflow==2.3.0 
+    pip install tensorflow==2.3.0
+
+# ------- other pkgs -------
+RUN python3 -m pip install pyntcloud
 
 RUN echo "source /root/miniconda3/bin/activate Point-cloud-process" >> ~/.bashrc
