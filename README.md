@@ -19,6 +19,7 @@
 * `PCL: PCL-1.8.0`
 * `minicond3`:默认版本为`python3.7`
 * `CUDA-10.1+cudnn-7`
+* `CloudCompare`
 * `Open3D-0.11`（`conda`虚拟环境`Point-cloud-process`中）
 * `tensorflow-2.3.0`（`conda`虚拟环境`Point-cloud-process`中）
 * `pytorch-1.7.0`（`conda`虚拟环境`Point-cloud-process`中）

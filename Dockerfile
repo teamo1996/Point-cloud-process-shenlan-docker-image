@@ -39,6 +39,7 @@ RUN apt update && \
         libglib2.0-dev libboost-dev libboost-all-dev \
         libomp-dev libtbb-dev \
         libgoogle-glog-dev \
+        libqt5svg5-dev libqt5opengl5-dev qt5-default qttools5-dev qttools5-dev-tools libqt5websockets5-dev \
         # PCL:
         libeigen3-dev libpcl-dev &&\
     apt autoclean && \
@@ -54,7 +55,15 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-py37_4.10.3-Linux-x86_64
     bash Miniconda3-py37_4.10.3-Linux-x86_64.sh -b && \
     rm Miniconda3-py37_4.10.3-Linux-x86_64.sh
 
-# ------ PART 3: install python pkgs ------
+# ------ PART 3: install Cloudcompare
+
+RUN git clone --recursive git://github.com/cloudcompare/CloudCompare.git && \
+    cd CloudCompare && \
+    mkdir build && cd build && cmake -DCMAKE_PREFIX_PATH=/usr/lib/x86_64-linux-gnu/cmake .. && make install && cd / && rm -r /CloudCompare
+
+# RUN 
+
+# ------ PART 4: install python pkgs ------
 
 # ------ create virtual envirment -----
 
