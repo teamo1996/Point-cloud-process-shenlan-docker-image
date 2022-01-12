@@ -61,7 +61,12 @@ RUN git clone --recursive git://github.com/cloudcompare/CloudCompare.git && \
     cd CloudCompare && \
     mkdir build && cd build && cmake -DCMAKE_PREFIX_PATH=/usr/lib/x86_64-linux-gnu/cmake .. && make install && cd / && rm -r /CloudCompare
 
-# ------ PART 4: install python pkgs ------
+# ------ PART 4: move cudnn libary to correct location ------
+
+RUN mv /usr/lib/x86_64-linux-gnu/libcudnn* /usr/local/cuda/lib64/ && \
+    mv /usr/include/cudnn.h /usr/local/cuda/include 
+
+# ------ PART 5: install python pkgs ------
 
 # ------ create virtual envirment -----
 
@@ -87,6 +92,9 @@ RUN python3 -m pip install --no-cache-dir --upgrade open3d && \
 # ------ pytorch 1.4.0 ------
     conda install pytorch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2 cudatoolkit=10.1 -c pytorch && \
 # ------ tensorflow 2.3.0 ------
-    python3 -m pip install tensorflow==2.3.0 pyntcloud && \
-# ------- init environment -----
+    python3 -m pip install tensorflow==2.3.0 pyntcloud 
+
+# ------- PART 6: init environment -----
+RUN echo "export LD_LIBRARY_PATH=/usr/local/cuda-10.1/extras/CUPTI/lib64:$LD_LIBRARY_PATH" >> ~/.bashrc && \
     echo "source /root/miniconda3/bin/activate Point-cloud-process" >> ~/.bashrc
+    
