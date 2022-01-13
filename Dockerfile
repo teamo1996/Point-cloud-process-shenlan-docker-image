@@ -18,7 +18,7 @@ ENV NVIDIA_DRIVER_CAPABILITIES all
 
 # ------ PART 1: install the necessary tools ------
 RUN apt update && \
-    apt-get install -y --no-install-recommends --allow-unauthenticated\
+    apt-get install -y --no-install-recommends --allow-unauthenticated\ 
         # package utils:
         sudo dpkg pkg-config apt-utils \
         # network utils:
@@ -63,8 +63,8 @@ RUN git clone --recursive git://github.com/cloudcompare/CloudCompare.git && \
 
 # ------ PART 4: move cudnn libary to correct location ------
 
-RUN mv /usr/lib/x86_64-linux-gnu/libcudnn* /usr/local/cuda/lib64/ && \
-    mv /usr/include/cudnn.h /usr/local/cuda/include 
+RUN cp /usr/lib/x86_64-linux-gnu/libcudnn* /usr/local/cuda/lib64/ && \
+    cp /usr/include/cudnn.h /usr/local/cuda/include 
 
 # ------ PART 5: install python pkgs ------
 
@@ -92,7 +92,7 @@ RUN python3 -m pip install --no-cache-dir --upgrade open3d && \
 # ------ pytorch 1.4.0 ------
     conda install pytorch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2 cudatoolkit=10.1 -c pytorch && \
 # ------ tensorflow 2.3.0 ------
-    python3 -m pip install tensorflow==2.3.0 pyntcloud 
+    python3 -m pip install tensorflow==2.3.0 pyntcloud torchsummary
 
 # ------- PART 6: init environment -----
 RUN echo "export LD_LIBRARY_PATH=/usr/local/cuda-10.1/extras/CUPTI/lib64:$LD_LIBRARY_PATH" >> ~/.bashrc && \
